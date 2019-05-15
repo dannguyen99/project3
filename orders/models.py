@@ -17,6 +17,9 @@ class Pizza(models.Model):
 class Topping(models.Model):
     name = models.CharField(max_length = 64)
 
+    def __str__(self):
+        return self.name
+
 class Sub(models.Model):
     name = models.CharField(max_length = 64)
     price_small = models.DecimalField(max_digits=5, decimal_places=2)
@@ -27,6 +30,7 @@ class Sub(models.Model):
 class Pasta(models.Model):
     name = models.CharField(max_length = 64)
     price = models.DecimalField(max_digits=5, decimal_places=2)
+    url = models.CharField(max_length = 1000, default = "/static/orders/images/pasta-1.jpg")
 
 class Salad(models.Model):
     name = models.CharField(max_length = 64)

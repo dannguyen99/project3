@@ -12,6 +12,7 @@ def home(request):
 def menu(request):
     context = {
     "pizzas":Pizza.objects.all(),
-    "i":0
+    "toppings":Topping.objects.all(),
+    "pastas":Pasta.objects.all()
     }
     return render(request, "orders/menu.html", context)
