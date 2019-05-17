@@ -13,6 +13,9 @@ def menu(request):
     context = {
     "pizzas":Pizza.objects.all(),
     "toppings":Topping.objects.all(),
-    "pastas":Pasta.objects.all()
+    "pastas":Pasta.objects.all(),
+    "subs":Sub.objects.all(),
+    "salads":Salad.objects.all(),
+    "dinner_platters":Dinner_Platter.objects.all()
     }
     return render(request, "orders/menu.html", context)

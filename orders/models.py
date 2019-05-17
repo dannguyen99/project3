@@ -35,7 +35,10 @@ class Pasta(models.Model):
 class Salad(models.Model):
     name = models.CharField(max_length = 64)
     price = models.DecimalField(max_digits=5, decimal_places=2)
+    url = models.CharField(max_length = 1000, default = "https://www.tasteofhome.com/wp-content/uploads/2017/10/Armenian-Garden-Salad_exps47594_TH2236620A05_31_3bC_RMS-1.jpg")
 
-class Dinner_platter(models.Model):
+class Dinner_Platter(models.Model):
+    name = models.CharField(max_length = 64)
     price_small = models.DecimalField(max_digits=5, decimal_places=2)
     price_large = models.DecimalField(max_digits=5, decimal_places=2,default = 0)
+    url = models.CharField(max_length = 1000, default = "/static/orders/images/pasta-1.jpg")
