@@ -10,7 +10,11 @@ def index(request):
     return render(request, "orders/index.html")
 
 def home(request):
-    return render(request, "orders/index.html")
+    if not request.user.is_authenticated:
+        return
+    else:
+        return render(request, "orders/index.html")
+
 
 def menu(request):
     context = {
@@ -40,3 +44,12 @@ def signup_view(request):
     "message":message
     }
     return render(request, 'orders/sign_up.html', context)
+
+def log_in(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(request, username = username, password = password)
+    if user is not None:
+        login(request, user)
+        return HttpResponseRedirect(reverse('index'))
+    else:
