@@ -52,3 +52,13 @@ def log_in(request):
         return HttpResponseRedirect(reverse('index'))
     else:
         return render(request, 'orders/login.html')
+
+def log_out(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('index'))
+
+def cart(request):
+    return render(request, 'orders/cart.html')
+
+def about(request):
+    return render(request, 'orders/about.html')
