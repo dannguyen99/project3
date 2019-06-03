@@ -10,9 +10,14 @@ def index(request):
         if not request.user.is_authenticated:
             return render(request, "orders/login.html")
         context = {
-        "user": request.user
+        "pizzas":Pizza.objects.all(),
+        "toppings":Topping.objects.all(),
+        "pastas":Pasta.objects.all(),
+        "subs":Sub.objects.all(),
+        "salads":Salad.objects.all(),
+        "dinner_platters":Dinner_Platter.objects.all()
         }
-        return render(request, "orders/index.html")
+        return render(request, "orders/index.html", context)
 
 def menu(request):
     context = {
@@ -36,6 +41,8 @@ def signup_view(request):
         user = User.objects.create_user(username, email, password)
         user.save()
         message = "You have succesfully sign up"
+        c = Cart(username = user)
+        c.save()
     except Exception as e:
         message = e
     context = {
@@ -58,7 +65,10 @@ def log_out(request):
     return HttpResponseRedirect(reverse('index'))
 
 def cart(request):
-    return render(request, 'orders/cart.html')
+    context = {
+    "cart": request.user.cart.first()
+    }
+    return render(request, 'orders/cart.html', context)
 
 def about(request):
     return render(request, 'orders/about.html')

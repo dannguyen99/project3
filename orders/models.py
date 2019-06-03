@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -43,12 +44,18 @@ class Pasta(models.Model):
     url = models.CharField(
         max_length=1000, default="/static/orders/images/pasta-1.jpg")
 
+    def __str__(self):
+        return self.name
+
 
 class Salad(models.Model):
     name = models.CharField(max_length=64)
     price = models.DecimalField(max_digits=5, decimal_places=2)
     url = models.CharField(
         max_length=1000, default="https://www.tasteofhome.com/wp-content/uploads/2017/10/Armenian-Garden-Salad_exps47594_TH2236620A05_31_3bC_RMS-1.jpg")
+
+    def __str__(self):
+        return self.name
 
 
 class Dinner_Platter(models.Model):
@@ -59,10 +66,18 @@ class Dinner_Platter(models.Model):
     url = models.CharField(
         max_length=1000, default="/static/orders/images/pasta-1.jpg")
 
+    def __str__(self):
+        return self.name
 
-class Cart():
-    def __init__():
-        self.dishes = []
 
-    def add(item):
-        self.dished.append(item)
+class Cart(models.Model):
+    username = models.ForeignKey(User, on_delete=models.CASCADE, related_name="cart")
+    pizzas = models.ManyToManyField(Pizza)
+    toppings = models.ManyToManyField(Topping)
+    subs = models.ManyToManyField(Sub)
+    pastas = models.ManyToManyField(Pasta)
+    salads = models.ManyToManyField(Salad)
+    dinner_platters = models.ManyToManyField(Dinner_Platter)
+
+    def __str__(self):
+        return self.username.username
