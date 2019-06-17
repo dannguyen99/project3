@@ -20,6 +20,12 @@ class Pizza(models.Model):
     def __str__(self):
         return f"{self.name} - {self.type} - {self.price_small} - {self.price_large}"
 
+    def display(self):
+        if self.type == 'RL':
+            return 'Regular'
+        else:
+            return 'Sicilian'
+
 
 class Topping(models.Model):
     name = models.CharField(max_length=64)
