@@ -88,15 +88,15 @@ def cart(request):
 
 def order(request):
     try:
-        name = request.POST['name']
-        category = request.POST['category']
+        name = request.GET['name']
+        category = request.GET['category']
         p = Pizza.objects.filter(name=name, type=category).first()
         c = request.user.cart.first()
-        c.add(p)
-        c.save
+        c.pizzas.add(p)
+        c.save()
         return JsonResponse({"success": True})
     except Exception as e:
-        return JsonResponse({"success": False, "message": e})
+        return JsonResponse({"success": False, "message": str(e)})
 
 
 
