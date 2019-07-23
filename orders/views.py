@@ -88,11 +88,22 @@ def cart(request):
 
 def order(request):
     try:
-        name = request.GET['name']
-        category = request.GET['category']
-        p = Pizza.objects.filter(name=name, type=category).first()
         c = request.user.cart.first()
-        c.pizzas.add(p)
+        name = request.GET['name']
+        type = request.GET['type']
+        if type == 'pizza':
+            category = request.GET['category']
+            p = Pizza.objects.filter(name=name, type=category).first()
+            c.pizzas.add(p)
+        elif type == 'salad':
+            s = Salad.objects.filter(name=name).first()
+            c.salads.add(s)
+        elif type == 'dinner_platter':
+            d = Dinner_Platter.objects.filter(name = name).first()
+            c.dinner_platters.add(d)
+        elif type == 'pasta':
+            p = Pasta.objects.filter(name = name).first()
+            c.pastas.add(p)
         c.save()
         return JsonResponse({"success": True})
     except Exception as e:
