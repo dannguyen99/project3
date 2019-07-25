@@ -109,6 +109,28 @@ def order(request):
     except Exception as e:
         return JsonResponse({"success": False, "message": str(e)})
 
+def remove(request):
+    try:
+        c = request.user.cart.first()
+        name = request.GET['name']
+        type = request.GET['type']
+        if type == 'pizza':
+            category = request.GET['category']
+            p = Pizza.objects.filter(name=name, type=category).first()
+            c.pizzas.remove(p)
+        elif type == 'salad':
+            s = Salad.objects.filter(name=name).first()
+            c.salads.remove(s)
+        elif type == 'dinner_platter':
+            d = Dinner_Platter.objects.filter(name = name).first()
+            c.dinner_platters.remove(d)
+        elif type == 'pasta':
+            p = Pasta.objects.filter(name = name).first()
+            c.pastas.remove(p)
+        c.save()
+        return JsonResponse({"success": True})
+    except Exception as e:
+        return JsonResponse({"success": False, "message": str(e)})
 
 
 def about(request):
