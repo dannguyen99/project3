@@ -2,7 +2,10 @@
 {% load static %}
 {% block head %}
 <title>Your cart</title>
-<script src="{% static 'orders/js/cart.js' %}"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 {% endblock %}
 
 {% block body %}
@@ -113,33 +116,44 @@
         </div>
         {% endfor %}
         <div style="text-align:center;">
-          <button type="button" class="btn btn-primary py-3 px-5" data-toggle="modal" data-target="#exampleModal">Order</button>
+          <button type="button" class="btn btn-primary py-3 px-5" data-toggle="modal" data-target="#exampleModalLong">Order</button>
         </div>
-
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <div class="row justify-content-center mb-5 pb-3 mt-5 pt-5">
-          <div class="col-md-7 heading-section text-center ftco-animate">
-            <p class="flip"><span class="deg1"></span><span class="deg2"></span><span class="deg3"></span></p>
-            {% for pizza in pizzas %}
-            <h3>{{pizza.name}}</h3>
-            {% endfor %}
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
       </div>
     </div>
   </div>
 </section>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        {% for pizza in pizzas %}
+        <p>{{pizza.display }} {{pizza.name}}</p>
+        {% endfor %}
+        {% for pasta in pastas %}
+        <p>{{ pasta.name }}</p>
+        {% endfor %}
+        {% for salad in salads %}
+        <p>{{salad.name}}</p>
+        {% endfor %}
+        {% for dinner_platter in dinner_platters %}
+        <p>{{ dinner_platter.name }}</p>
+        {% endfor %}
+        <p style="text-align:center">Total: <script type="text/javascript">
+            var total = 0;
+            document.querySelectorAll('.price').forEach(price => {
+              total += parseFloat(price.innerHTML);
+            })
+            document.write(total);
+          </script>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Place Your Order</button>
+      </div>
+    </div>
+  </div>
+</div>
 <script src="{% static 'orders/js/cart.js' %}"></script>
 {% endblock %}
