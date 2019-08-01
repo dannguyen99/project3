@@ -155,3 +155,12 @@ def order_view(request, order_username):
         "dinner_platters": c.dinner_platters.all()
     }
     return render(request, 'orders/cart.html', context)
+
+def confirm(request):
+    try:
+        c = request.user.cart.first();
+        c.confirmation = True
+        c.save()
+        return JsonResponse({"success":True})
+    except Exception as e:
+        return JsonResponse({"success": False, "message": str(e)})

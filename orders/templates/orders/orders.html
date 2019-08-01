@@ -36,6 +36,7 @@
 
             <h4>Orders from</h4>
             {% for order in carts %}
+            {% if order.confirmation %}
             <div class="pricing-entry d-flex ftco-animate">
               <div class="desc pl-3">
                 <div class="d-flex text align-items-center">
@@ -44,13 +45,9 @@
                 </div>
               </div>
             </div>
+            {% endif %}
             {% endfor %}
 
-
-
-            <div style="text-align:center;">
-              <button type="button" class="btn btn-primary py-3 px-5" data-toggle="modal" data-target="#exampleModalLong">Order</button>
-            </div>
           </div>
         </div>
       </div>

@@ -48,3 +48,15 @@ document.querySelectorAll('.btn.btn-white.btn-outline-white').forEach(button => 
     }
   }
 });
+document.querySelector('#confirm').onclick = () =>{
+  $.ajax({
+    url: '/confirm',
+    success: function(data) {
+      alert("You food is comming");
+      window.location.href = "http://127.0.0.1:8000/menu";
+    },
+    failure: function(data) {
+      alert(data.message);
+    }
+  })
+}
