@@ -84,6 +84,7 @@ class Cart(models.Model):
     pastas = models.ManyToManyField(Pasta)
     salads = models.ManyToManyField(Salad)
     dinner_platters = models.ManyToManyField(Dinner_Platter)
+    confirmation = models.BooleanField(default = False)
 
     def __str__(self):
         return self.username.username

@@ -12,5 +12,7 @@ urlpatterns = [
     path('cart', views.cart, name = 'cart'),
     path('about', views.about, name = 'about'),
     path('order', views.order, name = 'order'),
-    path('remove', views.remove, name = 'remove')
+    path('remove', views.remove, name = 'remove'),
+    path('orders', views.orders, name = 'orders'),
+    path('order_view/<str:order_username>/', views.order_view, name = 'order_view')
 ]

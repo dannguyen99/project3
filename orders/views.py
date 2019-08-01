@@ -135,3 +135,23 @@ def remove(request):
 
 def about(request):
     return render(request, 'orders/about.html')
+
+def orders(request):
+    if not request.user.is_authenticated:
+        return render(request, "orders/login.html")
+    c = Cart.objects.all()
+    context = {
+        "carts":c
+    }
+    return render(request, 'orders/orders.html', context)
+
+def order_view(request, order_username):
+    u = User.objects.filter(username = order_username).first()
+    c = u.cart.first()
+    context = {
+        "pizzas": c.pizzas.all(),
+        "pastas": c.pastas.all(),
+        "salads": c.salads.all(),
+        "dinner_platters": c.dinner_platters.all()
+    }
+    return render(request, 'orders/cart.html', context)
